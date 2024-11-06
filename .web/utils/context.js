@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo, useReducer, useState } from "react"
-import { applyDelta, Event, hydrateClientStorage, useEventLoop, refs } from "/utils/state.js"
+import { applyDelta, Event, hydrateClientStorage, useEventLoop, refs } from "$/utils/state.js"
 
 export const initialState = {}
 
@@ -14,13 +14,15 @@ export const clientStorage = {}
 
 export const state_name = undefined
 
+export const exception_state_name = undefined
+
 export const onLoadInternalEvent = () => []
 
 export const initialEvents = () => []
 
 export const isDevMode = true
 
-export const lastCompiledTimeStamp = "2024-10-20 18:26:16.165224"
+export const lastCompiledTimeStamp = "2024-11-01 16:26:49.858845"
 
 export function UploadFilesProvider({ children }) {
   const [filesById, setFilesById] = useState({})
