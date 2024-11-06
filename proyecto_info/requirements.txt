@@ -1,0 +1,4 @@
+reflex==0.6.2.post1
+frontend_packages=[
+        "react-debounce-input@3.3.0",
+    ],

@@ -2,31 +2,19 @@
 
 
 import { Fragment, useContext, useEffect, useState } from "react"
-import { ColorModeContext, EventLoopContext } from "/utils/context"
-import { Event, getBackendURL, isTrue, refs } from "/utils/state"
+import { ColorModeContext, EventLoopContext } from "$/utils/context"
+import { Event, getBackendURL, isTrue, refs } from "$/utils/state"
 import { WifiOffIcon as LucideWifiOffIcon } from "lucide-react"
 import { keyframes } from "@emotion/react"
 import { toast, Toaster } from "sonner"
-import env from "/env.json"
+import env from "$/env.json"
 import Error from "next/error"
-import { useClientSideRouting } from "/utils/client_side_routing"
+import { useClientSideRouting } from "$/utils/client_side_routing"
 import NextHead from "next/head"
 
 
 
-export function Div_24a2e81d0c5d3cb5b5f786fdef44e514 () {
-  const [addEvents, connectErrors] = useContext(EventLoopContext);
-
-
-
-  return (
-    <div css={({ ["position"] : "fixed", ["width"] : "100vw", ["height"] : "0" })} title={("Connection Error: "+((connectErrors.length > 0) ? connectErrors[connectErrors.length - 1].message : ''))}>
-  <Fragment_e521b13e556da291bcec5187a783ea81/>
-</div>
-  )
-}
-
-export function Fragment_e521b13e556da291bcec5187a783ea81 () {
+export function Fragment_ecc7fc8159e7de57fc1e48e5f03b41bb () {
   const [addEvents, connectErrors] = useContext(EventLoopContext);
 
 
@@ -43,16 +31,6 @@ export function Fragment_e521b13e556da291bcec5187a783ea81 () {
 </Fragment>
   )
 }
-
-const pulse = keyframes`
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-`
-
 
 export function Toaster_9d6e054b03c6e5d1bea1c0a5576b4e6d () {
   const { resolvedColorMode } = useContext(ColorModeContext)
@@ -83,13 +61,35 @@ export function Toaster_9d6e054b03c6e5d1bea1c0a5576b4e6d () {
   )
 }
 
+const pulse = keyframes`
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+`
+
+
+export function Div_64093a13086094dda35345330da0660b () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+
+
+  return (
+    <div css={({ ["position"] : "fixed", ["width"] : "100vw", ["height"] : "0" })} title={("Connection Error: "+((connectErrors.length > 0) ? connectErrors[connectErrors.length - 1].message : ''))}>
+  <Fragment_ecc7fc8159e7de57fc1e48e5f03b41bb/>
+</div>
+  )
+}
+
 export default function Component() {
   const routeNotFound = useClientSideRouting()
 
   return (
     <Fragment>
   <Fragment>
-  <Div_24a2e81d0c5d3cb5b5f786fdef44e514/>
+  <Div_64093a13086094dda35345330da0660b/>
   <Toaster_9d6e054b03c6e5d1bea1c0a5576b4e6d/>
 </Fragment>
   <Fragment>
