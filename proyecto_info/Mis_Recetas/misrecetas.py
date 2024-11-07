@@ -116,13 +116,13 @@ def misrecetas() -> rx.Component:
                           rx.button(item['ingredientes']),
                           rx.text(item['procedimientos'], color="blue"),
                           rx.button(f"Borrar", on_click=lambda:[
-                                            StateSubmit.borrar_receta(item['id']), 
-                                            rx.toast("Receta Borrada Correctamente", position="top-right", 
-                                                    style={
-                                                    "background-color": "green",
-                                                    "color": "white",
-                                                    "border": "1px solid green",
-                                                    "border-radius": "0.53m",
+                                        StateSubmit.borrar_receta(item['id']), 
+                                        rx.toast("Receta Borrada Correctamente", position="top-right", 
+                                                style={
+                                                "background-color": "green",
+                                                "color": "white",
+                                                "border": "1px solid green",
+                                                "border-radius": "0.53m",
                                                 }, ) ]),
                           
                          height="20rem", width="30rem" 
