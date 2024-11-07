@@ -16,7 +16,7 @@ def index(recetass: list = []) -> rx.Component:
                     background_color="#eee5e9",
                     height="100vh",),
                 
-             width="100%"
+            width="100%"
             ),
 app = rx.App()
 app.add_page(index)

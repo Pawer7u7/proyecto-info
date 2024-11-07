@@ -20,48 +20,48 @@ class State_recetas(rx.State):
         # print("Datos recibidos:", recetasdata)
         for recipe in recetasdata:
             self.receta.append({'name': recipe['recipe']['label'],
-             'url':str(recipe['recipe']['url']),
-             'ingredients': recipe['recipe']['ingredientLines'],
-             'calories': float(recipe['recipe']['calories']),
-             'image': recipe['recipe']['image']})
+            'url':str(recipe['recipe']['url']),
+            'ingredients': recipe['recipe']['ingredientLines'],
+            'calories': float(recipe['recipe']['calories']),
+            'image': recipe['recipe']['image']})
         self.searchInput = ""
         #print(type(self.receta[0]['url']))
         # print(self.receta)
         # return self.receta
         # return recetasdata
 def recetasss() -> rx.Component:
-         return rx.box(navbar(),
+        return rx.box(navbar(),
             rx.flex(rx.flex(
                     rx.text("Recetas", font_size="5rem", color="#556b2f", text_shadow="1px 1px 1px black"),
-                    rx.text("Ingrese el nombre de una receta o ingredeiente para buscar",color="#556b2f"),
+                    rx.text("Ingrese el nombre de una receta o ingrediente para buscar",color="#556b2f"),
                 justify="center",
                 align="center",
                 flex_direction="column",
             ),
                 rx.flex(
                     
-                     rx.input(
+                    rx.input(
                 placeholder="Buscar receta...",
                 value=State_recetas.searchInput,
                 on_change=State_recetas.set_searchInput
             ),
             rx.button("Buscar", on_click=lambda:
-                              [State_recetas.set_loading(True),
+                            [State_recetas.set_loading(True),
                                 State_recetas.get_recetas,
                                 State_recetas.set_loading(False)
                                 ]),
                 #rx.button("Recetas", on_click=lambda: rx.console_log(State_recetas.receta)),
                 #rx.button("url", on_click=lambda: rx.console_log(State_recetas.receta[0]['url'])),
-                     
+
                     justify_content="center",
                     align_content="center",
                     width="100%"
                 ),rx.cond(State_recetas.loading,
                     rx.flex( 
-                           rx.button(
+                        rx.button(
                                 rx.spinner(loading=True), "CARGANDO RECETAS", disabled=True, size="3",color="black"
                                     ),justify="center",)
-                   
+                
                     ),
                     rx.grid(rx.foreach(State_recetas.receta, lambda item:
                 rx.card(
@@ -85,16 +85,18 @@ def recetasss() -> rx.Component:
                         flex_direction="column",),
                     justify_content="center",
                     ),
-                   
+                
                     margin="15px",
                     justify_content="center",
                     variant="classic"
-            ),),columns="4",spacing="4"
+            ),),
+            columns="4",
+            spacing="4"
             ),
-                  width="100%",
+                width="100%",
                     background_color="#eee5e9",
                     min_height="100vh",
                     flex_direction="column",),
             
-              
+            
             ),

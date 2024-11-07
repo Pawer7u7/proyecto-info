@@ -16,7 +16,7 @@ class Supabase():
         if len(response.data) > 0:
             for item in response.data:
                     recetas_data.append({'nombre_receta':item['nombre_receta'],
-             'ingredientes':item['ingredientes'], 'procedimientos':item['procedimientos'], 'imagen':item['imagen']})
+            'ingredientes':item['ingredientes'], 'procedimientos':item['procedimientos'], 'imagen':item['imagen']})
         return recetas_data
     def add_receta(self, nombre_receta: str, ingredientes: str, procedimientos: str, imagen: str):
         response = self.supabase.table("recetas").insert({
@@ -59,55 +59,105 @@ class StateSubmit(rx.State):
             busqueda = self.busqueda_recetas.lower()
             self.recetaaaas = list(filter(lambda receta: busqueda in receta.get("nombre_receta").lower(), self.recetaaaas))
         print("Recetas filtradas:", self.recetaaaas)
-    def set_busqueda_recetas(self, valor: str):
+    def set_busqueda_recetas(self, valor):
         # Actualiza el término de búsqueda y filtra recetas
         self.busqueda_recetas = valor
         self.buscar_recetas()
 def misrecetas() -> rx.Component:
     return rx.box(
         navbar(),
-        rx.box(
-        # Formulario para agregar una nueva receta
-        rx.text("Agregar nueva receta"),
-        rx.input(placeholder="Nombre de la receta",value=StateSubmit.nombre_receta, on_change=StateSubmit.set_nombre_receta),
-        rx.input(placeholder="Ingredientes", value=StateSubmit.ingredientes, on_change=StateSubmit.set_ingredientes),
-        rx.input(placeholder="Procedimientos",value=StateSubmit.procedimientos, on_change=StateSubmit.set_procedimientos),
-        rx.input(placeholder="Imagen",value=StateSubmit.imagen, on_change=StateSubmit.set_imagen),
-        rx.button("Agregar receta",type="submit",on_click=lambda: [
-            StateSubmit.submit_receta,
-            rx.toast("Receta Cargada Correctamente", position="top-right", 
-            style={
-            "background-color": "green",
-            "color": "white",
-            "border": "1px solid green",
-            "border-radius": "0.53m",
-        }, )
-            ]),
+        rx.flex(
+            rx.box(
+            # Formulario para agregar una nueva receta
+            rx.flex(
+                rx.text("Agregar nueva receta",
+                    size = "6",
+                    color = "#556b2f",
+                    text_shadow = "1px 1px 1px black"),
+                justify = "center",
+                margin = "10px"),
+            rx.input(placeholder="Nombre de la receta",
+                value=StateSubmit.nombre_receta,
+                on_change=StateSubmit.set_nombre_receta,
+                width = "20rem",
+                height = "2.5rem",
+                margin = "1rem"),
+            rx.input(placeholder="Ingredientes",
+                value=StateSubmit.ingredientes,
+                on_change=StateSubmit.set_ingredientes,
+                width = "20rem",
+                height = "2.5rem",
+                margin = "1rem"),
+            rx.input(placeholder="Imagen",
+                value=StateSubmit.imagen,
+                on_change=StateSubmit.set_imagen,
+                width = "20rem",
+                height = "2.5rem",
+                margin = "1rem"),
+            rx.text_area(placeholder="Procedimientos",
+                value=StateSubmit.procedimientos,
+                on_change=StateSubmit.set_procedimientos,
+                rows= "10",
+                widht = "20",
+                margin = "1rem"),
+            rx.flex(
+                rx.button("Agregar receta",
+                type="submit",
+                on_click=lambda: [
+                StateSubmit.submit_receta,
+                rx.toast("Receta Cargada Correctamente",
+                    position="top-right", 
+                    style={"background-color": "green",
+                        "color": "white",
+                        "border": "1px solid green",
+                        "border-radius": "0.53m"},)]),
+            justify="center",
+            align="center",
+            margin = "1rem")
+            ),
+        justify="center",
+        align="center",
+        flex_direction="column"
         ),
-        rx.input(
-                placeholder="Buscar receta...",
+        rx.divider(),
+        rx.flex(
+            rx.input(placeholder="Buscar receta...",
                 value=StateSubmit.busqueda_recetas,
                 on_change=StateSubmit.set_busqueda_recetas,
+                width = "20rem",
+                height = "2.5rem",
+                margin = "1rem"
             ),
-        rx.button("Buscar", on_click=StateSubmit.buscar_recetas),
+            rx.button("Buscar",
+                on_click=StateSubmit.buscar_recetas),
+            justify = "center",
+            align = "center"
+        ),
         #rx.button("log", on_click=lambda: rx.console_log(StateSubmit.recetaaaas)),
         rx.grid(
-            
-        rx.foreach(StateSubmit.recetaaaas, lambda item:
-                rx.flex( rx.card(
-                          rx.text(item["nombre_receta"], color="white", size="6"),
-                          rx.image(
-                              src=item['imagen'],
-                              width="100px",
-                              height="100px",
-                              fit="cover",
-                          ),
-                          rx.button(item['ingredientes']),
-                          rx.text(item['procedimientos'], color="blue"),
-                         height="20rem", width="30rem" 
-                   ),margin="13px")
-                  
-                   ), columns="4",
-    spacing="4",
-    width="100%", )
+            rx.foreach(StateSubmit.recetaaaas, lambda item:
+                rx.flex(
+                    rx.card(
+                        rx.text(item["nombre_receta"],
+                            color = "white",
+                            size = "6"),
+                        rx.image(
+                            src=item['imagen'],
+                            width="100px",
+                            height="100px",
+                            fit="cover",
+                        ),
+                        rx.button(item['ingredientes']),
+                        rx.text(item['procedimientos'],
+                            color="blue"),
+                        height="20rem",
+                        width="30rem" 
+                    ),
+                margin="13px"
+                )
+            ),
+            columns="4",
+            spacing="4",
+            width="100%"
         )
+    )
