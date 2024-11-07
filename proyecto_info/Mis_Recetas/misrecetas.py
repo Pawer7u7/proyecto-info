@@ -142,9 +142,8 @@ def misrecetas() -> rx.Component:
         rx.button("Buscar", on_click=StateSubmit.buscar_recetas),
         #rx.button("log", on_click=lambda: rx.console_log(StateSubmit.recetaaaas)),
         rx.grid(
-            
-        rx.foreach(StateSubmit.recetaaaas, lambda item:
-                rx.flex( rx.card(
+            rx.foreach(StateSubmit.recetaaaas, lambda item:
+                rx.flex(rx.card(
                         rx.text(item["nombre_receta"], color="white", size="6"),
                         rx.image(
                             src=item['imagen'],
@@ -155,15 +154,14 @@ def misrecetas() -> rx.Component:
                         rx.button(item['ingredientes']),
                         rx.text(item['procedimientos'], color="blue"),
                         rx.button(f"Borrar", on_click=lambda:[
-                                        StateSubmit.borrar_receta(item['id']), 
-                                        rx.toast("Receta Borrada Correctamente", position="top-right", 
-                                                style={
-                                                "background-color": "green",
-                                                "color": "white",
-                                                "border": "1px solid green",
-                                                "border-radius": "0.53m",
-                                                }, ) ]),
-                        
+                            StateSubmit.borrar_receta(item['id']), 
+                            rx.toast("Receta Borrada Correctamente", position="top-right", 
+                                    style={
+                                    "background-color": "green",
+                                    "color": "white",
+                                    "border": "1px solid green",
+                                    "border-radius": "0.53m",
+                                    }, ) ]),
                         height="20rem", width="30rem" 
                 ),margin="13px")
                 
