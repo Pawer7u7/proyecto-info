@@ -138,8 +138,13 @@ def misrecetas() -> rx.Component:
                 width = "20rem",
                 height = "2.5rem",
                 margin = "1rem"
-            ),
+
+            ),justify="center",
+            align="center",),
+        # rx.button("Buscar", on_click=StateSubmit.buscar_recetas),
+
         rx.button("Buscar", on_click=StateSubmit.buscar_recetas),
+
         #rx.button("log", on_click=lambda: rx.console_log(StateSubmit.recetaaaas)),
         rx.grid(
             rx.foreach(StateSubmit.recetaaaas, lambda item:
@@ -167,6 +172,17 @@ def misrecetas() -> rx.Component:
                 
         ), columns="4",
     spacing="4",
+
+    width="100%", ),
+    
+                  width="100%",
+                    background_color="#eee5e9",
+                    min_height="100vh",
+
+        )
+    
+
     width="100%", )
         )
     )
+
