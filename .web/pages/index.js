@@ -15,6 +15,15 @@ import NextHead from "next/head"
 
 
 
+const pulse = keyframes`
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+`
+
 
                 function Fallback({ error, resetErrorBoundary }) {
                     return (
@@ -33,18 +42,7 @@ import NextHead from "next/head"
                 }
             
 
-const pulse = keyframes`
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-`
-
-
-export function Fragment_ecc7fc8159e7de57fc1e48e5f03b41bb () {
-
+export function Fragment_e521b13e556da291bcec5187a783ea81 () {
   const [addEvents, connectErrors] = useContext(EventLoopContext);
 
 
@@ -91,38 +89,15 @@ export function Toaster_9d6e054b03c6e5d1bea1c0a5576b4e6d () {
   )
 }
 
-export function Div_64093a13086094dda35345330da0660b () {
-
+export function Div_24a2e81d0c5d3cb5b5f786fdef44e514 () {
   const [addEvents, connectErrors] = useContext(EventLoopContext);
 
 
 
   return (
     <div css={({ ["position"] : "fixed", ["width"] : "100vw", ["height"] : "0" })} title={("Connection Error: "+((connectErrors.length > 0) ? connectErrors[connectErrors.length - 1].message : ''))}>
-
-  <Fragment_ecc7fc8159e7de57fc1e48e5f03b41bb/>
-
+  <Fragment_e521b13e556da291bcec5187a783ea81/>
 </div>
-  )
-}
-
-
-export function Errorboundary_d9b813fc0ee383a26145dbb23f858f85 () {
-
-  const [addEvents, connectErrors] = useContext(EventLoopContext);
-
-
-
-  return (
-    <Fragment>
-  {isTrue((connectErrors.length > 0)) ? (
-  <Fragment>
-  <LucideWifiOffIcon css={({ ["color"] : "crimson", ["zIndex"] : 9999, ["position"] : "fixed", ["bottom"] : "33px", ["right"] : "33px", ["animation"] : (pulse+" 1s infinite") })} size={32}/>
-</Fragment>
-) : (
-  <Fragment/>
-)}
-</Fragment>
   )
 }
 
@@ -178,9 +153,12 @@ export default function Component() {
 </RadixThemesFlex>
 </RadixThemesFlex>
   <RadixThemesFlex css={({ ["width"] : "100%", ["backgroundColor"] : "#eee5e9", ["height"] : "100vh" })}>
-  <RadixThemesFlex css={({ ["justifyContent"] : "center", ["alignContent"] : "center", ["width"] : "100%" })}>
+  <RadixThemesFlex align={"center"} css={({ ["width"] : "100%", ["flexDirection"] : "column" })} justify={"center"}>
   <RadixThemesText as={"p"} css={({ ["fontSize"] : "8rem", ["color"] : "#556b2f", ["textShadow"] : "1px 1px 1px black" })}>
   {"Comarca Code Recetas App"}
+</RadixThemesText>
+  <RadixThemesText as={"p"} css={({ ["display"] : "flex", ["justifyContent"] : "center", ["alignItems"] : "center", ["height"] : "100vh", ["color"] : "#556b2f", ["fontSize"] : "2em", ["textAlign"] : "center" })}>
+  {"Nuestro proyecto se trata sobre una p\u00e1gina de recetas en la cual el usuario busca a traves de distintas especificaciones, su receta deseada. \n                        La p\u00e1gina se realiz\u00f3 con reflex el cual es un framework (plantilla que sirve para desarrollar un proyecto)\n                        de python de codigo abierto que permite crear aplicaciones web full-stack."}
 </RadixThemesText>
 </RadixThemesFlex>
 </RadixThemesFlex>
@@ -195,4 +173,3 @@ export default function Component() {
 </ErrorBoundary>
   )
 }
-

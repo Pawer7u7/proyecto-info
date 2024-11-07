@@ -15,7 +15,7 @@ class Supabase():
         recetas_data: list[dict] = []
         if len(response.data) > 0:
             for item in response.data:
-                    recetas_data.append({'nombre_receta':item['nombre_receta'],
+                    recetas_data.append({"id":item["id"],'nombre_receta':item['nombre_receta'],
             'ingredientes':item['ingredientes'], 'procedimientos':item['procedimientos'], 'imagen':item['imagen']})
         return recetas_data
     def add_receta(self, nombre_receta: str, ingredientes: str, procedimientos: str, imagen: str):
@@ -137,13 +137,12 @@ def misrecetas() -> rx.Component:
                 on_change=StateSubmit.set_busqueda_recetas,
                 width = "20rem",
                 height = "2.5rem",
-                margin = "1rem"
-
+                margin = "1rem",
             ),justify="center",
             align="center",),
         # rx.button("Buscar", on_click=StateSubmit.buscar_recetas),
 
-        rx.button("Buscar", on_click=StateSubmit.buscar_recetas),
+        #rx.button("Buscar", on_click=StateSubmit.buscar_recetas),
 
         #rx.button("log", on_click=lambda: rx.console_log(StateSubmit.recetaaaas)),
         rx.grid(
@@ -175,14 +174,8 @@ def misrecetas() -> rx.Component:
 
     width="100%", ),
     
-                  width="100%",
-                    background_color="#eee5e9",
+                width="100%",
                     min_height="100vh",
 
         )
-    
-
-    width="100%", )
-        )
-    )
 

@@ -43,15 +43,14 @@ export function Toaster_9d6e054b03c6e5d1bea1c0a5576b4e6d () {
   )
 }
 
-
-export function Div_64093a13086094dda35345330da0660b () {
+export function Div_24a2e81d0c5d3cb5b5f786fdef44e514 () {
   const [addEvents, connectErrors] = useContext(EventLoopContext);
 
 
 
   return (
     <div css={({ ["position"] : "fixed", ["width"] : "100vw", ["height"] : "0" })} title={("Connection Error: "+((connectErrors.length > 0) ? connectErrors[connectErrors.length - 1].message : ''))}>
-  <Fragment_ecc7fc8159e7de57fc1e48e5f03b41bb/>
+  <Fragment_e521b13e556da291bcec5187a783ea81/>
 </div>
   )
 }
@@ -66,7 +65,8 @@ const pulse = keyframes`
 `
 
 
-
+export function Fragment_e521b13e556da291bcec5187a783ea81 () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
 
 
 
