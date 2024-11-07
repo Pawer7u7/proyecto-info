@@ -8,7 +8,7 @@ class Supabase():
     SUPABASE_URL = os.getenv("SUPABASE_URL")
     SUPABASE_KEY = os.getenv("SUPABASE_KEY")
     supabase = supabase.Client(SUPABASE_URL, SUPABASE_KEY)
-    
+
     def get_recetas(self) -> list[dict]:
 
         response = self.supabase.table("recetas").select("*").execute()
@@ -25,7 +25,10 @@ class Supabase():
             "imagen": imagen,
             "procedimientos": procedimientos
         }).execute()
-
+    def borrar_receta_supabase(self, id:int):
+        response = self.supabase.table("recetas").delete().eq("id", id).execute()
+        print(response, id)
+        return response
 supabase = Supabase()
 async def recetas() -> list[dict]:
     return supabase.get_recetas()
@@ -35,6 +38,7 @@ class StateSubmit(rx.State):
     ingredientes: str = ""
     procedimientos: str = ""
     imagen: str = ""
+    id: int = 0
     recetas_filtradas: list[dict] = []
     busqueda_recetas=str = ""
 
@@ -42,7 +46,13 @@ class StateSubmit(rx.State):
 ##INTENTO DE POST###########################################
     async def receta(self):
         self.recetaaaas = await recetas()
-    
+
+    def borrar_receta(self,id: int):
+        self.id = id
+        supabase.borrar_receta_supabase(self.id)
+        self.recetaaaas = supabase.get_recetas()
+        self.id = 0
+        print(self.id)
 
     async def submit_receta(self):
         supabase.add_receta(self.nombre_receta, self.ingredientes, self.procedimientos, self.imagen)
@@ -59,6 +69,7 @@ class StateSubmit(rx.State):
             busqueda = self.busqueda_recetas.lower()
             self.recetaaaas = list(filter(lambda receta: busqueda in receta.get("nombre_receta").lower(), self.recetaaaas))
         print("Recetas filtradas:", self.recetaaaas)
+    
     def set_busqueda_recetas(self, valor):
         # Actualiza el término de búsqueda y filtra recetas
         self.busqueda_recetas = valor
@@ -128,19 +139,13 @@ def misrecetas() -> rx.Component:
                 height = "2.5rem",
                 margin = "1rem"
             ),
-            rx.button("Buscar",
-                on_click=StateSubmit.buscar_recetas),
-            justify = "center",
-            align = "center"
-        ),
+        rx.button("Buscar", on_click=StateSubmit.buscar_recetas),
         #rx.button("log", on_click=lambda: rx.console_log(StateSubmit.recetaaaas)),
         rx.grid(
-            rx.foreach(StateSubmit.recetaaaas, lambda item:
-                rx.flex(
-                    rx.card(
-                        rx.text(item["nombre_receta"],
-                            color = "white",
-                            size = "6"),
+            
+        rx.foreach(StateSubmit.recetaaaas, lambda item:
+                rx.flex( rx.card(
+                        rx.text(item["nombre_receta"], color="white", size="6"),
                         rx.image(
                             src=item['imagen'],
                             width="100px",
@@ -148,16 +153,12 @@ def misrecetas() -> rx.Component:
                             fit="cover",
                         ),
                         rx.button(item['ingredientes']),
-                        rx.text(item['procedimientos'],
-                            color="blue"),
-                        height="20rem",
-                        width="30rem" 
-                    ),
-                margin="13px"
-                )
-            ),
-            columns="4",
-            spacing="4",
-            width="100%"
+                        rx.text(item['procedimientos'], color="blue"),
+                        height="20rem", width="30rem" 
+                ),margin="13px")
+                
+                ), columns="4",
+    spacing="4",
+    width="100%", )
         )
     )
