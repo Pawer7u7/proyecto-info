@@ -15,8 +15,8 @@ class Supabase():
         recetas_data: list[dict] = []
         if len(response.data) > 0:
             for item in response.data:
-                    recetas_data.append({'id':item['id'],'nombre_receta':item['nombre_receta'],
-             'ingredientes':item['ingredientes'], 'procedimientos':item['procedimientos'], 'imagen':item['imagen']})
+                    recetas_data.append({'nombre_receta':item['nombre_receta'],
+            'ingredientes':item['ingredientes'], 'procedimientos':item['procedimientos'], 'imagen':item['imagen']})
         return recetas_data
     def add_receta(self, nombre_receta: str, ingredientes: str, procedimientos: str, imagen: str):
         response = self.supabase.table("recetas").insert({
@@ -70,7 +70,7 @@ class StateSubmit(rx.State):
             self.recetaaaas = list(filter(lambda receta: busqueda in receta.get("nombre_receta").lower(), self.recetaaaas))
         print("Recetas filtradas:", self.recetaaaas)
     
-    def set_busqueda_recetas(self, valor: str):
+    def set_busqueda_recetas(self, valor):
         # Actualiza el término de búsqueda y filtra recetas
         self.busqueda_recetas = valor
         self.buscar_recetas()
@@ -138,9 +138,13 @@ def misrecetas() -> rx.Component:
                 width = "20rem",
                 height = "2.5rem",
                 margin = "1rem"
+
             ),justify="center",
             align="center",),
         # rx.button("Buscar", on_click=StateSubmit.buscar_recetas),
+
+        rx.button("Buscar", on_click=StateSubmit.buscar_recetas),
+
         #rx.button("log", on_click=lambda: rx.console_log(StateSubmit.recetaaaas)),
         rx.grid(
             
@@ -170,6 +174,7 @@ def misrecetas() -> rx.Component:
                 
         ), columns="4",
     spacing="4",
+
     width="100%", ),
     
                   width="100%",
@@ -178,3 +183,8 @@ def misrecetas() -> rx.Component:
 
         )
     
+
+    width="100%", )
+        )
+    )
+
