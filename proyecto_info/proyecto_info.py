@@ -3,7 +3,7 @@ from .NavBar.navbar import navbar
 from .Recetas.recetas import recetasss
 from .Mis_Recetas.misrecetas import misrecetas, StateSubmit
 
-def index(recetass: list = []) -> rx.Component:
+def index() -> rx.Component:
     return rx.box(
         navbar(),
         # add_receta(),   
