@@ -18,7 +18,6 @@ def index() -> rx.Component:
                 
              width="100%"
             ),
-
 app = rx.App()
 app.add_page(index)
 app.add_page(recetasss)
