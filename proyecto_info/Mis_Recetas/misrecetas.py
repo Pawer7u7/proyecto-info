@@ -154,9 +154,8 @@ def misrecetas() -> rx.Component:
                         ),
                         rx.button(item['ingredientes']),
                         rx.text(item['procedimientos'], color="blue"),
-                        height="20rem", width="30rem" 
+                        height="20rem", width="30rem"
                 ),margin="13px")
-                
                 ), columns="4",
     spacing="4",
     width="100%", )
